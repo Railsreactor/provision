@@ -2,10 +2,13 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |f| require f }
 Dir[File.dirname(__FILE__) + '/packages/*.rb'].each { |f| require f }
 
 policy :app_server, :roles => :rails do
+  requires :commons
   requires :ruby
+  requires :bundler
 end
 
 policy :db_server, :roles => :db do
+  requires :commons
   requires :postgres_db
 end
 
@@ -13,8 +16,8 @@ deployment do
   delivery :capistrano do
     recipes 'Capfile'
 
-    role :rails, '192.168.100.33' # Vagrant IP address by default
-    role :db,    '192.168.100.33' # Vagrant IP address by default
+    role :rails,   '192.168.100.33' # Vagrant IP address by default
+    role :db,      '192.168.100.33' # Vagrant IP address by default
 
     if ENV['STAGE'] == 'vagrant'
       set :user, 'vagrant'

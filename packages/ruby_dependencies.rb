@@ -1,6 +1,8 @@
 package :ruby_dependencies do
   description 'Setup Ruby dependencies'
-  apt 'libssl-dev zlib1g-dev libreadline-dev libpq-dev'
+  apt 'libssl-dev zlib1g-dev libreadline-dev libpq-dev' do
+    pre :install, ['aptitude update']
+  end
 
   verify do
     has_apt 'libssl-dev'

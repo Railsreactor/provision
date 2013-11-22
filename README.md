@@ -12,12 +12,12 @@ Set up Vagrant http://downloads.vagrantup.com/tags/v1.3.5
 
 Check out settings in `Vagrantfile`
 
-Try provision `STAGE=vagrant sprinkle -s install.rb -v`
+Run Vagrant `vagrant destroy -f && vagrant up`
+
+Test provision `STAGE=vagrant sprinkle -s install.rb -v`
 
 ## Provision existing server
 
-Set up IP address in `install.rb`
-
-Set up roles and packages
+Set up IP address, roles and packages in `install.rb`
 
 Run provision `sprinkle -s install.rb -v`
