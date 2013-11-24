@@ -14,10 +14,12 @@ Check out settings in `Vagrantfile`
 
 Run Vagrant `vagrant destroy -f && vagrant up`
 
-Test provision `STAGE=vagrant sprinkle -s install.rb -v`
+Test setup (create users etc) provision `SETUP=1 STAGE=vagrant sprinkle -s install.rb -v`
+
+Test provision (install software) `STAGE=vagrant sprinkle -s install.rb -v`
 
 ## Provision existing server
 
 Set up IP address, roles and packages in `install.rb`
 
-Run provision `sprinkle -s install.rb -v`
+Run provision `SETUP=1 sprinkle -s install.rb -v`
