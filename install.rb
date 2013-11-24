@@ -3,7 +3,7 @@ Dir[File.dirname(__FILE__) + '/packages/*.rb'].each { |f| require f }
 
 if ENV['SETUP'] == '1'
   policy :setup, :roles => :setup do
-    requires :create_provision_user
+    requires :create_deployer_user
   end
 
   deployment do
@@ -22,13 +22,10 @@ if ENV['SETUP'] == '1'
   end
 else
   policy :app_server, :roles => :rails do
-    requires :git
-    requires :ruby
-    requires :bundler
+    requires :rbenv
   end
 
   policy :db_server, :roles => :db do
-    requires :git
     requires :postgres_db
   end
 
@@ -36,7 +33,7 @@ else
     delivery :capistrano do
       recipes 'Capfile'
 
-      set :user, 'provision'
+      set :user, 'deployer'
 
       role :rails,        '192.168.100.33' # Vagrant IP address by default
       role :db,           '192.168.100.33' # Vagrant IP address by default
