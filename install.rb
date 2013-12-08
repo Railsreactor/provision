@@ -1,50 +1,38 @@
-Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |f| require f }
-Dir[File.dirname(__FILE__) + '/packages/*.rb'].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), '/lib/*.rb')].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), '/packages/*.rb')].each { |f| require f }
 
-if ENV['SETUP'] == '1'
-  policy :setup, :roles => :setup do
-    requires :create_deployer_user
-  end
+# Configuration
+nodes_path = File.join(File.dirname(__FILE__), 'nodes.yml')
+raise "\nCould not load NODES configuration: #{nodes_path} not found" unless File.exists?(nodes_path)
+NODES = YAML::load(File.open(nodes_path))
+puts "nodes.yml: #{NODES}"
 
-  deployment do
-    delivery :capistrano do
-      recipes 'Capfile'
+NODES.each do |node|
+  if node['enabled']
+    puts "Node #{node['name']} is enabled"
 
-      role :setup, '192.168.100.33'
+    # Reqire all packages
+    policy :provision, :roles => :provision do
+      node['packages'].each do |package|
+        requires package
+      end
+    end
 
-      if ENV['STAGE'] == 'vagrant'
-        set :user, 'vagrant'
-        set :password, 'vagrant'
-      else
-        set :user, 'root'
+    # Provision required packages into current node
+    deployment do
+      delivery :capistrano do
+        recipes 'Capfile'
+        role :provision, node['ip']
+        set :user, node['user']
+        set :password, node['password']
+      end
+
+      # source based package installer defaults
+      source do
+        prefix '/usr/local'
+        archives '/usr/local/sources'
+        builds '/usr/local/build'
       end
     end
   end
-else
-  policy :app_server, :roles => :rails do
-    requires :rbenv
-  end
-
-  policy :db_server, :roles => :db do
-    requires :postgres_db
-  end
-
-  deployment do
-    delivery :capistrano do
-      recipes 'Capfile'
-
-      set :user, 'deployer'
-
-      role :rails,        '192.168.100.33' # Vagrant IP address by default
-      role :db,           '192.168.100.33' # Vagrant IP address by default
-    end
-
-    # source based package installer defaults
-    source do
-      prefix '/usr/local'
-      archives '/usr/local/sources'
-      builds '/usr/local/build'
-    end
-  end
 end
-

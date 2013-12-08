@@ -1,0 +1,23 @@
+# Sample configurations
+-
+  name: demo
+  enabled: false
+  ip: 127.0.0.1
+  packages:
+   - :create_deployer_user
+   - :postgres_db
+   - :rbenv
+  user: demo
+  password: demo
+
+-
+  name: vagrant
+  enabled: true
+  ip: 192.168.100.33
+  packages:
+   - :create_deployer_user
+   - :postgres_db
+   #- :rbenv
+  user: vagrant
+  password: vagrant
+
