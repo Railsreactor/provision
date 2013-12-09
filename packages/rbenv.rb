@@ -25,6 +25,7 @@ package :install_ruby_build do
 
   requires :git
 
+  runner 'rm -rf /home/deployer/.rbenv/plugins/ruby-build'
   runner 'git clone https://github.com/sstephenson/ruby-build.git /home/deployer/.rbenv/plugins/ruby-build'
 
   verify do

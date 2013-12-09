@@ -22,13 +22,17 @@ Check out settings in `Vagrantfile`
 
 Run Vagrant `vagrant destroy -f && vagrant up`
 
-Run provision `sprinkle -s install.rb -v`
+Run provision to set up deployer user `STAGE=setup ruby provision.rb`
+
+Run provision `ruby provision.rb`
+
+All-together `vagrant destroy -f && vagrant up && STAGE=setup ruby provision.rb && ruby provision.rb`
 
 ## Provision existing server
 
 Set up IP address, roles and packages in `nodes.yml`
 
-Run provision `sprinkle -s install.rb -v`
+Run provision `ruby provision.rb`
 
 ## Contributing
 

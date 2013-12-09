@@ -3,28 +3,37 @@ Dir[File.join(File.dirname(__FILE__), '/packages/*.rb')].each { |f| require f }
 
 # Configuration
 nodes_path = File.join(File.dirname(__FILE__), 'nodes.yml')
-raise "\nCould not load NODES configuration: #{nodes_path} not found" unless File.exists?(nodes_path)
 NODES = YAML::load(File.open(nodes_path))
-puts "nodes.yml: #{NODES}"
+NODE_CONFIG = NODES[ENV['NODE']]
 
-NODES.each do |node|
-  if node['enabled']
-    puts "Node #{node['name']} is enabled"
+if NODE_CONFIG['enabled']
+  if ENV['STAGE'] == 'setup'
+    policy :setup, :roles => :setup do
+      requires :create_deployer_user
+    end
 
-    # Reqire all packages
+    deployment do
+      delivery :capistrano do
+        recipes 'Capfile'
+
+        role :setup, NODE_CONFIG['ip']
+        set :user, NODE_CONFIG['root_user']
+        set :password, NODE_CONFIG['root_password']
+      end
+    end
+  else
     policy :provision, :roles => :provision do
-      node['packages'].each do |package|
+      NODE_CONFIG['packages'].each do |package|
         requires package
       end
     end
 
-    # Provision required packages into current node
     deployment do
       delivery :capistrano do
         recipes 'Capfile'
-        role :provision, node['ip']
-        set :user, node['user']
-        set :password, node['password']
+
+        role :provision, NODE_CONFIG['ip']
+        set :user, NODE_CONFIG['deployer_user']
       end
 
       # source based package installer defaults
