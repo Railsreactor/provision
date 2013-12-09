@@ -1,3 +1,7 @@
+package :postgres do
+  requires :postgres_db, :postgres_encoding_utf8
+end
+
 package :postgres_add_repo do
   file '/etc/apt/sources.list.d/pgdg.list',
        contents: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main',
@@ -27,7 +31,19 @@ package :postgres_db do
   requires :postgres_add_repo
 end
 
-#package :postgres_user do
+package :postgres_encoding_utf8 do
+  runner %{echo "
+update pg_database set datistemplate=false where datname='template1';
+drop database Template1;
+create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
+update pg_database set datistemplate=true where datname='template1';" | sudo -u postgres psql}
+
+  verify do
+    @commands << "echo \"select datcollate from pg_database where datname='template1'\" | sudo -u postgres psql | grep en_US.utf8"
+  end
+end
+
+# #package :postgres_user do
 #  runner %{echo "CREATE ROLE #{DEPLOY_USER} WITH LOGIN ENCRYPTED PASSWORD '#{DEPLOY_POSTGRES_PASSWORD}';" | sudo -u postgres psql}
 #
 #  verify do
