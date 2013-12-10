@@ -1,11 +1,11 @@
 package :postgres do
-  requires :postgres_db, :postgres_encoding_utf8
+  requires :postgres_db, :postgres_encoding_utf8, :update_pg_hba
 end
 
 package :postgres_add_repo do
   file '/etc/apt/sources.list.d/pgdg.list',
-       contents: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main',
-       sudo: true
+    contents: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main',
+    sudo: true
 
   runner 'wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -'
   runner 'apt-get update'
@@ -43,10 +43,19 @@ update pg_database set datistemplate=true where datname='template1';" | sudo -u 
   end
 end
 
-# #package :postgres_user do
-#  runner %{echo "CREATE ROLE #{DEPLOY_USER} WITH LOGIN ENCRYPTED PASSWORD '#{DEPLOY_POSTGRES_PASSWORD}';" | sudo -u postgres psql}
-#
-#  verify do
-#    @commands << "echo 'SELECT ROLNAME FROM PG_ROLES' | sudo -u postgres psql | grep #{DEPLOY_USER}"
-#  end
-#end
+package :update_pg_hba do
+  description "PostgreSQL: Config"
+
+  config_file_path = '/etc/postgresql/9.3/main/pg_hba.conf'
+  config_template = File.join(File.dirname(__FILE__), 'pg_hba.conf')
+
+  file config_file_path, contents: File.read(config_template), sudo: true
+
+  runner "chown postgres:postgres #{config_file_path}"
+
+  verify do
+    has_file config_file_path
+    @commands << "cat #{config_file_path} | grep local | grep all | grep postgres | grep trust"
+    @commands << 'ls -la /etc/postgresql/9.3/main/ | grep pg_hba | grep "postgres postgres"'
+  end
+end
