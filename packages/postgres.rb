@@ -44,7 +44,7 @@ update pg_database set datistemplate=true where datname='template1';" | sudo -u 
 end
 
 package :update_pg_hba do
-  description "PostgreSQL: Config"
+  description 'PostgreSQL: Config'
 
   config_file_path = '/etc/postgresql/9.3/main/pg_hba.conf'
   config_template = File.join(File.dirname(__FILE__), 'pg_hba.conf')
@@ -52,10 +52,16 @@ package :update_pg_hba do
   file config_file_path, contents: File.read(config_template), sudo: true
 
   runner "chown postgres:postgres #{config_file_path}"
+  runner "chmod 755 #{config_file_path}"
+  runner 'service postgresql restart'
 
   verify do
     has_file config_file_path
-    @commands << "cat #{config_file_path} | grep local | grep all | grep postgres | grep trust"
-    @commands << 'ls -la /etc/postgresql/9.3/main/ | grep pg_hba | grep "postgres postgres"'
+    has_permission config_file_path, '755'
+    belongs_to_user config_file_path, 'postgres'
+    belongs_to_group config_file_path, 'postgres'
   end
 end
+
+#TODO:
+# auto restart after reboot, https://github.com/grimen/sprinkle-stack/blob/master/packages/database/postgresql.rb
