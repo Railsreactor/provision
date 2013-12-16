@@ -47,7 +47,7 @@ package :update_pg_hba do
   description 'PostgreSQL: Config'
 
   config_file_path = '/etc/postgresql/9.3/main/pg_hba.conf'
-  config_template = File.join(File.dirname(__FILE__), 'pg_hba.conf')
+  config_template = File.join(File.dirname(__FILE__), 'configs', 'pg_hba.conf')
 
   file config_file_path, contents: File.read(config_template), sudo: true
 
