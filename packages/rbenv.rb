@@ -56,7 +56,7 @@ package :install_ruby do
 
   requires :install_ruby_build, :ruby_dependencies
 
-  runner '/home/deployer/.rbenv/bin/rbenv install 2.0.0-p353'
+  runner 'CONFIGURE_OPTS="--disable-install-doc" /home/deployer/.rbenv/bin/rbenv install -f -v 2.0.0-p353'
   push_text '2.0.0-p353', '/home/deployer/.rbenv/global'
 
   verify do
