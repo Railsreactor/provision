@@ -2,3 +2,5 @@
 .DS_Store
 .vagrant
 nodes.yml
+.bundle
+
