@@ -18,7 +18,7 @@ package :nginx do
   requires :nginx_apt
   apt 'nginx'
 
-  # runner 'sudo rm /etc/nginx/conf.d/default.conf'
+  runner 'sudo rm /etc/nginx/conf.d/default.conf'
 
   verify do
     has_apt 'nginx'
