@@ -1,34 +1,40 @@
-package :postgres do
-  requires :postgres_db, :postgres_encoding_utf8, :update_pg_hba
-end
+package :postgre_apt do
+  apt_list    = '/etc/apt/sources.list.d/pgdg.list'
+  apt_source  = "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main\n"
 
-package :postgres_add_repo do
-  file '/etc/apt/sources.list.d/pgdg.list',
-    contents: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main',
-    sudo: true
-
-  runner 'wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -'
-  runner 'apt-get update'
-
-  verify do
-    has_file '/etc/apt/sources.list.d/pgdg.list'
-    @commands << "apt-key list | grep 'ACCC4CF8'"
-  end
-end
-
-package :postgres_db do
-  description 'Setup PostgreSQL database from package'
-  version 9.3
-  runner "apt-get install postgresql-#{version} postgresql-contrib-#{version} -y" do
-    pre :install, ['aptitude update']
+  push_text apt_source, apt_list, sudo: true do
+    pre :install, 'true && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -'
+    post :install, 'sudo apt-get update'
   end
 
   verify do
-    has_pg_user 'postgres'
-    has_pg_version version
+    file_contains apt_list, 'precise-pgdg'
   end
+end
 
-  requires :postgres_add_repo
+# This can be usefull if you do not need server itself but want to connect to remote server
+package :postgresql_client do
+  requires :postgre_apt
+  # apt 'pqdev'
+  apt 'postgresql-client-9.3'
+
+  verify do
+    has_apt 'postgresql-client-9.3'
+  end
+end
+
+package :postgresql_server do
+  requires :postgre_apt
+  apt 'postgresql-9.3 postgresql-contrib-9.3'
+
+  verify do
+    has_apt "postgresql-9.3"
+    has_apt "postgresql-contrib-9.3"
+  end
+end
+
+package :postgres_configured do
+  requires :postgresql_server, :postgres_encoding_utf8, :update_pg_hba
 end
 
 package :postgres_encoding_utf8 do

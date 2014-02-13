@@ -34,6 +34,7 @@ if NODE_CONFIG['enabled']
 
         role :provision, NODE_CONFIG['ip']
         set :user, NODE_CONFIG['deployer_user']
+        set :pty, true
       end
 
       # source based package installer defaults
