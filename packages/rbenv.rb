@@ -35,11 +35,13 @@ end
 
 package :ruby_dependencies do
   description 'Setup Ruby dependencies'
-  apt 'libssl-dev zlib1g-dev libreadline-dev libpq-dev libyaml-dev build-essential flex gettext' do
+  apt 'libssl-dev zlib1g-dev libreadline-dev libpq-dev libyaml-dev build-essential flex gettext libxslt1-dev libxml2-dev' do
     pre :install, ['aptitude update']
   end
 
   verify do
+    has_apt 'libxml2-dev'
+    has_apt 'libxslt1-dev'
     has_apt 'libssl-dev'
     has_apt 'zlib1g-dev'
     has_apt 'libreadline-dev'
