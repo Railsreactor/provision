@@ -9,6 +9,6 @@ set :use_sudo, true
 
 default_run_options[:pty] = true
 
- # if ENV['NODE'] == 'vagrant'
- #   ssh_options[:keys] = ["#{ENV['HOME']}/.shh/authorized_keys"]
- # end
+if ENV['NODE'] == 'vagrant'
+  ssh_options[:keys] = ["#{ENV['HOME']}/.shh/authorized_keys"]
+end
