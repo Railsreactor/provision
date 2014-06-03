@@ -12,7 +12,7 @@ package :create_deployer_user do
   runner 'chmod 0700 /home/deployer/.ssh/authorized_keys'
 
   verify do
-    has_file '/etc/skel/.ssh/authorized_keys'
+    # has_file '/etc/skel/.ssh/authorized_keys'
     has_file '/home/deployer/.ssh/authorized_keys'
   end
 end
