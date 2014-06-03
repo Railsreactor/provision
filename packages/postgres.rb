@@ -1,4 +1,4 @@
-package :postgre_apt do
+package :postgres_apt do
   apt_list    = '/etc/apt/sources.list.d/pgdg.list'
   apt_source  = "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main\n"
 
@@ -14,7 +14,7 @@ end
 
 # This can be usefull if you do not need server itself but want to connect to remote server
 package :postgresql_client do
-  requires :postgre_apt
+  requires :postgres_apt
   # apt 'pqdev'
   apt 'postgresql-client-9.3'
 
@@ -33,8 +33,8 @@ package :postgresql_server do
   end
 end
 
-package :postgres_configured do
-  requires :postgresql_server, :update_pg_hba
+package :postgres_db do
+  requires :postgres_apt, :postgresql_server, :update_pg_hba
 end
 
 package :update_pg_hba do

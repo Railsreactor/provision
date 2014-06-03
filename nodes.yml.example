@@ -9,7 +9,7 @@ demo:
    - :nodejs
    - :utils
    - :postgresql_client
-   - :postgres_configured
+   - :postgres_db
   root_user: demo
   root_password: demo
   deployer_user: deployer_demo
@@ -19,12 +19,11 @@ vagrant:
   ip: 192.168.100.33
   packages:
    - :nginx
-   - :postgre_apt
    - :rbenv
    - :nodejs
    - :utils
    - :postgresql_client
-   - :postgres_configured
+   - :postgres_db
   root_user: vagrant
   root_password: vagrant
   deployer_user: deployer
