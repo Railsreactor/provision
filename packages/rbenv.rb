@@ -58,22 +58,22 @@ package :install_ruby do
 
   requires :install_ruby_build, :ruby_dependencies
 
-  runner 'true; CONFIGURE_OPTS="--disable-install-doc" ~/.rbenv/bin/rbenv install -f -v 2.0.0-p353', sudo: false
+  runner 'true; CONFIGURE_OPTS="--disable-install-doc" ~/.rbenv/bin/rbenv install -f -v 2.1.2', sudo: false
   runner 'true; touch ~/.rbenv/global'
-  push_text '2.0.0-p353', '~/.rbenv/global'
+  push_text '2.1.2', '~/.rbenv/global'
   runner 'true; echo "gem: --no-ri --no-rdoc\n" > ~/.gemrc'
 
   verify do
-    @commands << '~/.rbenv/bin/rbenv versions | grep 2.0.0-p353'
-    file_contains '~/.rbenv/global', '2.0.0-p353'
+    @commands << '~/.rbenv/bin/rbenv versions | grep 2.1.2'
+    file_contains '~/.rbenv/global', '2.1.2'
   end
 end
 
 package :add_rbenv_bundler do
-  runner "true; ~/.rbenv/versions/2.0.0-p353/bin/gem install bundler --no-ri --no-rdoc"
+  runner "true; ~/.rbenv/versions/2.1.2/bin/gem install bundler --no-ri --no-rdoc"
   runner "true; ~/.rbenv/bin/rbenv rehash"
 
   verify do
-    @commands << "~/.rbenv/versions/2.0.0-p353/bin/gem list | grep bundler"
+    @commands << "~/.rbenv/versions/2.1.2/bin/gem list | grep bundler"
   end
 end
