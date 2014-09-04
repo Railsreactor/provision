@@ -24,7 +24,7 @@ package :postgresql_client do
 end
 
 package :postgresql_server do
-  requires :postgre_apt
+  requires :postgres_apt
   apt 'postgresql-9.3 postgresql-contrib-9.3'
 
   verify do
