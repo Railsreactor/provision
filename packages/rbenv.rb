@@ -53,7 +53,7 @@ end
 
 package :install_ruby do
   description 'Install Ruby'
-  version '2.1.2'
+  version '2.1.5'
   requires :install_ruby_build, :ruby_dependencies
 
   runner "true; CONFIGURE_OPTS=\"--disable-install-doc\" ~/.rbenv/bin/rbenv install -f -v #{version}", sudo: false
@@ -68,7 +68,7 @@ package :install_ruby do
 end
 
 package :add_rbenv_bundler do
-  version '2.1.2'
+  version '2.1.5'
   runner "true; ~/.rbenv/versions/#{version}/bin/gem install bundler --no-ri --no-rdoc"
   runner "true; ~/.rbenv/bin/rbenv rehash"
 
