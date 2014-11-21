@@ -40,6 +40,7 @@ package :ruby_dependencies do
   end
 
   verify do
+    has_apt 'libxml2-dev'
     has_apt 'libssl-dev'
     has_apt 'zlib1g-dev'
     has_apt 'libreadline-dev'
