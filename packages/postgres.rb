@@ -57,10 +57,6 @@ package :update_pg_hba do
   end
 end
 
-package :postgres_configured do
-  requires :postgresql_server, :postgres_encoding_utf8, :update_pg_hba
-end
-
 package :postgres_encoding_utf8 do
   runner %{echo "
   update pg_database set datistemplate=false where datname='template1';
