@@ -1,30 +1,12 @@
-# Sample configurations
-demo:
-  enabled: false
-  ip: 127.0.0.1
-  packages:
-   - :nginx
-   - :postgres_apt
-   - :rbenv
-   - :nodejs
-   - :utils
-   - :postgresql_client
-   - :postgres_db
-  root_user: demo
-  root_password: demo
-  deployer_user: deployer_demo
-
 vagrant:
-  enabled: true
   ip: 192.168.100.33
   packages:
    - :nginx
    - :rbenv
    - :nodejs
    - :utils
-   - :postgresql_client
    - :postgres_db
   root_user: vagrant
   root_password: vagrant
-  deployer_user: deployer
+  deployer_user: ubuntu
 
