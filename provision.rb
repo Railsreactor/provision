@@ -7,7 +7,9 @@ NODES = YAML::load(File.open(nodes_path))
 puts "nodes: #{NODES}"
 
 NODES.keys.each do |node_key|
-  cmd = "NODE=#{node_key} STAGE=#{ENV['STAGE']} bundle exec sprinkle -s install.rb -v"
-  puts "\n#{cmd}\n"
-  system(cmd)
+  if NODES[node_key]['enabled']
+    cmd = "NODE=#{node_key} STAGE=#{ENV['STAGE']} bundle exec sprinkle -s install.rb -v"
+    puts "\n#{cmd}\n"
+    system(cmd)
+  end
 end
