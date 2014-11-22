@@ -10,10 +10,10 @@ package :install_rbenv do
   requires :git
 
   runner "true; git clone git://github.com/sstephenson/rbenv.git ~/.rbenv"
-  push_text 'export PATH="$HOME/.rbenv/bin:$PATH"', "~/.profile"
-  push_text 'eval "$(rbenv init -)"', "~/.profile"
-  # runner "chown #{user} #{home_path}/.bash_profile"
-  # runner "chmod -R g+rwxXs ~/.rbenv"
+  push_text 'export PATH="$HOME/.rbenv/bin:$PATH"', "~/.bash_profile"
+  push_text 'eval "$(rbenv init -)"', "~/.bash_profile"
+  #runner "chown #{user} #{home_path}/.bash_profile"
+  #runner "chmod -R g+rwxXs ~/.rbenv"
 
   verify do
     has_executable "~/.rbenv/bin/rbenv"
@@ -55,25 +55,26 @@ end
 
 package :install_ruby do
   description 'Install Ruby'
-
+  version '2.1.5'
   requires :install_ruby_build, :ruby_dependencies
 
-  runner 'true; CONFIGURE_OPTS="--disable-install-doc" ~/.rbenv/bin/rbenv install -f -v 2.1.2', sudo: false
+  runner "true; CONFIGURE_OPTS=\"--disable-install-doc\" ~/.rbenv/bin/rbenv install -f -v #{version}", sudo: false
   runner 'true; touch ~/.rbenv/global'
-  push_text '2.1.2', '~/.rbenv/global'
+  push_text version, '~/.rbenv/global'
   runner 'true; echo "gem: --no-ri --no-rdoc\n" > ~/.gemrc'
 
   verify do
-    @commands << '~/.rbenv/bin/rbenv versions | grep 2.1.2'
-    file_contains '~/.rbenv/global', '2.1.2'
+    @commands << "~/.rbenv/bin/rbenv versions | grep #{version}"
+    file_contains '~/.rbenv/global', version
   end
 end
 
 package :add_rbenv_bundler do
-  runner "true; ~/.rbenv/versions/2.1.2/bin/gem install bundler --no-ri --no-rdoc"
+  version '2.1.5'
+  runner "true; ~/.rbenv/versions/#{version}/bin/gem install bundler --no-ri --no-rdoc"
   runner "true; ~/.rbenv/bin/rbenv rehash"
 
   verify do
-    @commands << "~/.rbenv/versions/2.1.2/bin/gem list | grep bundler"
+    @commands << "~/.rbenv/versions/#{version}/bin/gem list | grep bundler"
   end
 end
