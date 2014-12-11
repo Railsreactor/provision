@@ -29,7 +29,7 @@ package :install_ruby_build do
   runner "true; git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
 
   verify do
-    @commands << "~/.rbenv/bin/rbenv install|grep Usage"
+    @commands << "~/.rbenv/bin/rbenv help install|grep Usage"
   end
 end
 
