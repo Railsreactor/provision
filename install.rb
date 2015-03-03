@@ -9,7 +9,7 @@ NODE_CONFIG = NODES[ENV['NODE']]
 if NODE_CONFIG['enabled']
   if ENV['STAGE'] == 'setup'
     policy :setup, :roles => :setup do
-      requires :setup_system
+      requires :setup_system, deployer_user: NODE_CONFIG['deployer_user']
     end
 
     deployment do
