@@ -1,5 +1,7 @@
 package :nodejs do
-  apt 'python-software-properties python g++ make' do
+  requires :ppa
+
+  apt 'python g++ make' do
     pre :install, ['aptitude update']
   end
 
