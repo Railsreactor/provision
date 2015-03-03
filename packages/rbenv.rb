@@ -1,7 +1,10 @@
 package :rbenv do
   description 'Install rbenv Ruby version manager'
+  defaults ruby_version: '2.1.5'
 
-  requires :install_rbenv, :install_ruby_build, :install_ruby, :add_rbenv_bundler
+  requires :install_rbenv, :install_ruby_build
+  requires :install_ruby, ruby_version: opts[:ruby_version]
+  requires :add_rbenv_bundler, ruby_version: opts[:ruby_version]
 end
 
 package :install_rbenv do
@@ -55,7 +58,7 @@ end
 
 package :install_ruby do
   description 'Install Ruby'
-  version '2.1.5'
+  version opts[:ruby_version]
   requires :install_ruby_build, :ruby_dependencies
 
   runner "true; CONFIGURE_OPTS=\"--disable-install-doc\" ~/.rbenv/bin/rbenv install -f -v #{version}", sudo: false
@@ -70,7 +73,8 @@ package :install_ruby do
 end
 
 package :add_rbenv_bundler do
-  version '2.1.5'
+  version opts[:ruby_version]
+
   runner "true; ~/.rbenv/versions/#{version}/bin/gem install bundler --no-ri --no-rdoc"
   runner "true; ~/.rbenv/bin/rbenv rehash"
 
