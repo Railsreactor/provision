@@ -10,11 +10,6 @@ package :security_upgrades do
 
     file config_file_path, contents: File.read(config_template), sudo: true, owner: 'root:root', mode: '644'
   end
-
-  verify do
-    has_file '/etc/apt/apt.conf.d/10periodic'
-    has_file '/etc/apt/apt.conf.d/50unattended-upgrades'
-  end
 end
 
 package :unattended_upgrades do
