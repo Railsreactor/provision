@@ -1,6 +1,6 @@
 ## Provision
 
-Project helps provision servers with minimal efforts using Sprinkle https://github.com/sprinkle-tool/sprinkle
+Project helps provision Ubuntu servers with minimal efforts using Sprinkle https://github.com/sprinkle-tool/sprinkle
 
 ## Set up
 

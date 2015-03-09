@@ -2,7 +2,7 @@ package :setup_system do
   defaults deployer_user: 'ubuntu'
 
   requires :create_deployer_user, deployer_user: opts[:deployer_user]
-  requires :system_settings
+  requires :system_settings, :security_upgrades
 end
 
 package :system_settings do
