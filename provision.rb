@@ -1,4 +1,5 @@
 require 'yaml'
+require 'active_support/all'
 
 # Configuration
 nodes_path = File.join(File.dirname(__FILE__), 'nodes.yml')

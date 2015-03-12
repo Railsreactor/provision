@@ -23,8 +23,9 @@ if NODE_CONFIG['enabled']
     end
   else
     policy :provision, :roles => :provision do
-      NODE_CONFIG['packages'].each do |package|
-        requires package
+      NODE_CONFIG['packages'].each do |package, options|
+        options ||= {}
+        requires package, options.symbolize_keys
       end
     end
 
