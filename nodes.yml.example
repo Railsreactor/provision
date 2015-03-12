@@ -2,12 +2,12 @@ vagrant:
   enabled: true
   ip: 192.168.100.33
   packages:
-   - :nginx
-   - :rbenv
-   - :nodejs
-   - :utils
-   - :postgres_db
+    nginx: ~
+    rbenv:
+      ruby_version: 2.2.1
+    nodejs: ~
+    utils: ~
+    postgres_db: ~
   root_user: vagrant
   root_password: vagrant
   deployer_user: ubuntu
-  ruby_version: 2.1.5

@@ -39,5 +39,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   net-ssh (= 2.7.0)
   sprinkle
