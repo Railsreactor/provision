@@ -10,19 +10,19 @@ end
 
 package :postgres_apt do
   apt_list    = '/etc/apt/sources.list.d/pgdg.list'
-  apt_source  = "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main\n"
+  apt_source  = "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -c -s`-pgdg main\n"
 
-  push_text apt_source, apt_list, sudo: true do
+  runner "echo \"#{apt_source}\" | sudo tee #{apt_list}" do
     pre :install, 'true && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -'
     post :install, 'sudo apt-get update'
   end
 
   verify do
-    file_contains apt_list, 'precise-pgdg'
+    file_contains apt_list, 'pgdg'
   end
 end
 
-# This can be usefull if you do not need server itself but want to connect to remote server
+# This can be useful if you do not need server itself but want to connect to remote server
 package :postgresql_client do
   requires :postgres_apt
 
