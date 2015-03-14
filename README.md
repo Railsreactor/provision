@@ -1,16 +1,21 @@
-## Provision
+Provision
+=========
 
-Project helps provision Ubuntu servers with minimal efforts using Sprinkle https://github.com/sprinkle-tool/sprinkle
+This project helps with provisioning for Ubuntu servers with minimal efforts using Sprinkle https://github.com/sprinkle-tool/sprinkle
 
 ## Set up
 
 Set up local ruby gemset and gems from Gemfile `bundle install`
 
-Check out sample configuration in `nodes.yml.example`
+## Provision
 
-Run `cp nodes.yml.example nodes.yml` and make changes for your system in `nodes.yml`
+### Server
 
-## Set up and test provisioning locally with Vagrant
+1. Set up an IP address, roles and packages in `nodes.yml`. You can use an example for this `cp nodes.yml.example nodes.yml`. It contains all the options available.
+1. Run setup stage to set up deployer user and automatic security upgrades `STAGE=setup ruby provision.rb`
+1. Provision your server `ruby provision.rb`
+
+### Vagrant
 
 Make sure `name: vagrant` node is `enabled: true` in `nodes.yml`
 
@@ -28,15 +33,14 @@ Run provision `ruby provision.rb`
 
 All-together `vagrant destroy -f && vagrant up && STAGE=setup ruby provision.rb && ruby provision.rb`
 
-## Provision existing server
-
-Set up IP address, roles and packages in `nodes.yml`
-
-Run provision `ruby provision.rb`
-
 ## Contributing
 
 Please create new package, test it and send pull request
+
+## Tested environments
+
+* Ruby: 2.1, 2.2
+* Postgres: 9.3
 
 ## License
 

@@ -38,11 +38,12 @@ end
 
 package :ruby_dependencies do
   description 'Setup Ruby dependencies'
-  apt 'libssl-dev zlib1g-dev libreadline-dev libpq-dev libyaml-dev build-essential flex gettext libxslt1-dev libxml2-dev' do
+  apt 'libffi-dev libssl-dev zlib1g-dev libreadline-dev libpq-dev libyaml-dev build-essential flex gettext libxslt1-dev libxml2-dev' do
     pre :install, ['aptitude update']
   end
 
   verify do
+    has_apt 'libffi-dev'
     has_apt 'libxml2-dev'
     has_apt 'libxslt1-dev'
     has_apt 'libssl-dev'
@@ -63,7 +64,7 @@ package :install_ruby do
 
   runner "true; CONFIGURE_OPTS=\"--disable-install-doc\" ~/.rbenv/bin/rbenv install -f -v #{version}", sudo: false
   runner 'true; touch ~/.rbenv/global'
-  push_text version, '~/.rbenv/global'
+  runner "echo '#{version}' > ~/.rbenv/global"
   runner 'true; echo "gem: --no-ri --no-rdoc\n" > ~/.gemrc'
 
   verify do
