@@ -11,9 +11,9 @@ Set up local ruby gemset and gems from Gemfile `bundle install`
 
 ### Server
 
-1. Set up an IP address, roles and packages in `nodes.yml`. You can use an example for this `cp nodes.yml.example nodes.yml`
-1. Run provision to set up deployer user and automatic upgrades `STAGE=setup ruby provision.rb`
-1. Run provision `ruby provision.rb`
+1. Set up an IP address, roles and packages in `nodes.yml`. You can use an example for this `cp nodes.yml.example nodes.yml`. It contains all the options available.
+1. Run setup stage to set up deployer user and automatic security upgrades `STAGE=setup ruby provision.rb`
+1. Provision your server `ruby provision.rb`
 
 ### Vagrant
 
