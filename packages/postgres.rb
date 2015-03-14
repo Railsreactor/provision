@@ -1,3 +1,13 @@
+package :postgres_db do
+  description 'Install Postgres'
+  defaults postgres_version: '9.4'
+
+  requires :postgres_apt
+  requires :postgresql_server, postgres_version: opts[:postgres_version]
+  requires :update_pg_hba, postgres_version: opts[:postgres_version]
+  requires :postgres_encoding_utf8
+end
+
 package :postgres_apt do
   apt_list    = '/etc/apt/sources.list.d/pgdg.list'
   apt_source  = "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main\n"
@@ -15,32 +25,28 @@ end
 # This can be usefull if you do not need server itself but want to connect to remote server
 package :postgresql_client do
   requires :postgres_apt
+
   # apt 'pqdev'
-  apt 'postgresql-client-9.3'
+  apt "postgresql-client-#{opts[:postgres_version]}"
 
   verify do
-    has_apt 'postgresql-client-9.3'
+    has_apt "postgresql-client-#{opts[:postgres_version]}"
   end
 end
 
 package :postgresql_server do
   requires :postgres_apt
-  apt 'postgresql-9.3 postgresql-contrib-9.3'
+
+  apt "postgresql-#{opts[:postgres_version]} postgresql-contrib-#{opts[:postgres_version]}"
 
   verify do
-    has_apt "postgresql-9.3"
-    has_apt "postgresql-contrib-9.3"
+    has_apt "postgresql-#{opts[:postgres_version]}"
+    has_apt "postgresql-contrib-#{opts[:postgres_version]}"
   end
 end
 
-package :postgres_db do
-  requires :postgres_apt, :postgresql_server, :update_pg_hba, :postgres_encoding_utf8
-end
-
 package :update_pg_hba do
-  description 'PostgreSQL: Config'
-
-  config_file_path = '/etc/postgresql/9.3/main/pg_hba.conf'
+  config_file_path = "/etc/postgresql/#{opts[:postgres_version]}/main/pg_hba.conf"
   config_template = File.join(File.dirname(__FILE__), 'configs', 'pg_hba.conf')
 
   file config_file_path, contents: File.read(config_template), sudo: true
