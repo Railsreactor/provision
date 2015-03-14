@@ -40,7 +40,7 @@ Please create new package, test it and send pull request
 ## Tested environments
 
 * Ruby: 2.1, 2.2
-* Postgres: 9.3
+* Postgres: 9.3, 9.4
 
 ## License
 
