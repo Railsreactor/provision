@@ -8,7 +8,12 @@ package :security_upgrades do
     config_file_path = "/etc/apt/apt.conf.d/#{config_file}"
     config_template = File.join(File.dirname(__FILE__), 'configs', config_file)
 
-    file config_file_path, contents: File.read(config_template), sudo: true, owner: 'root:root', mode: '644'
+    file(
+      config_file_path,
+      contents: File.read(config_template),
+      sudo: true,
+      owner: 'root:root',
+      mode: '644')
   end
 end
 

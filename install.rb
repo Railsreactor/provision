@@ -3,12 +3,12 @@ Dir[File.join(File.dirname(__FILE__), '/packages/*.rb')].each { |f| require f }
 
 # Configuration
 nodes_path = File.join(File.dirname(__FILE__), 'nodes.yml')
-NODES = YAML::load(File.open(nodes_path))
+NODES = YAML.load(File.open(nodes_path))
 NODE_CONFIG = NODES[ENV['NODE']]
 
 if NODE_CONFIG['enabled']
   if ENV['STAGE'] == 'setup'
-    policy :setup, :roles => :setup do
+    policy :setup, roles: :setup do
       requires :setup_system, deployer_user: NODE_CONFIG['deployer_user']
       requires :swap, deployer_user: NODE_CONFIG['deployer_user'] unless ENV['NO_SWAP']
     end
@@ -23,7 +23,7 @@ if NODE_CONFIG['enabled']
       end
     end
   else
-    policy :provision, :roles => :provision do
+    policy :provision, roles: :provision do
       NODE_CONFIG['packages'].each do |package, options|
         options ||= {}
         requires package, options.symbolize_keys

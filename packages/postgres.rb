@@ -74,5 +74,5 @@ package :postgres_encoding_utf8 do
     @commands << "echo \"select datcollate from pg_database where datname='template1'\" | sudo -u postgres psql | grep en_US.utf8"
   end
 end
-#TODO:
-# auto restart after reboot, https://github.com/grimen/sprinkle-stack/blob/master/packages/database/postgresql.rb
+
+# TODO: auto restart after reboot, https://github.com/grimen/sprinkle-stack/blob/master/packages/database/postgresql.rb

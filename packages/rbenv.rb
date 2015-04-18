@@ -1,6 +1,6 @@
 package :rbenv do
   description 'Install rbenv Ruby version manager'
-  defaults ruby_version: '2.1.5'
+  defaults ruby_version: '2.2.2'
 
   requires :install_rbenv, :install_ruby_build
   requires :install_ruby, ruby_version: opts[:ruby_version]
@@ -12,14 +12,14 @@ package :install_rbenv do
 
   requires :git
 
-  runner "true; git clone git://github.com/sstephenson/rbenv.git ~/.rbenv"
-  push_text 'export PATH="$HOME/.rbenv/bin:$PATH"', "~/.bash_profile"
-  push_text 'eval "$(rbenv init -)"', "~/.bash_profile"
-  #runner "chown #{user} #{home_path}/.bash_profile"
-  #runner "chmod -R g+rwxXs ~/.rbenv"
+  runner 'true; git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
+  push_text 'export PATH="$HOME/.rbenv/bin:$PATH"', '~/.bash_profile'
+  push_text 'eval "$(rbenv init -)"', '~/.bash_profile'
+  # runner "chown #{user} #{home_path}/.bash_profile"
+  # runner "chmod -R g+rwxXs ~/.rbenv"
 
   verify do
-    has_executable "~/.rbenv/bin/rbenv"
+    has_executable '~/.rbenv/bin/rbenv'
   end
 end
 
@@ -28,11 +28,11 @@ package :install_ruby_build do
 
   requires :git
 
-  runner "rm -rf ~/.rbenv/plugins/ruby-build"
-  runner "true; git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build"
+  runner 'rm -rf ~/.rbenv/plugins/ruby-build'
+  runner 'true; git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
 
   verify do
-    @commands << "~/.rbenv/bin/rbenv help install|grep Usage"
+    @commands << '~/.rbenv/bin/rbenv help install|grep Usage'
   end
 end
 
@@ -77,7 +77,7 @@ package :add_rbenv_bundler do
   version opts[:ruby_version]
 
   runner "true; ~/.rbenv/versions/#{version}/bin/gem install bundler --no-ri --no-rdoc"
-  runner "true; ~/.rbenv/bin/rbenv rehash"
+  runner 'true; ~/.rbenv/bin/rbenv rehash'
 
   verify do
     @commands << "~/.rbenv/versions/#{version}/bin/gem list | grep bundler"
