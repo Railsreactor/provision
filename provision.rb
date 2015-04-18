@@ -3,8 +3,8 @@ require 'active_support/all'
 
 # Configuration
 nodes_path = File.join(File.dirname(__FILE__), 'nodes.yml')
-raise "\nCould not load NODES configuration: #{nodes_path} not found" unless File.exists?(nodes_path)
-NODES = YAML::load(File.open(nodes_path))
+fail "\nCould not load NODES configuration: #{nodes_path} not found" unless File.exist?(nodes_path)
+NODES = YAML.load(File.open(nodes_path))
 puts "nodes: #{NODES}"
 
 NODES.keys.each do |node_key|

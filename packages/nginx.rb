@@ -1,5 +1,5 @@
 package :nginx do
-  description "Install nginx"
+  description 'Install nginx'
   requires :nginx_apt
 
   apt 'nginx'
