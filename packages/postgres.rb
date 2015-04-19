@@ -5,6 +5,7 @@ package :postgres_db do
   requires :postgres_apt
   requires :postgresql_server, postgres_version: opts[:postgres_version]
   requires :update_pg_hba, postgres_version: opts[:postgres_version]
+  requires :update_postgresql_conf, postgres_version: opts[:postgres_version]
   requires :postgres_encoding_utf8
 end
 
@@ -72,6 +73,14 @@ package :postgres_encoding_utf8 do
 
   verify do
     @commands << "echo \"select datcollate from pg_database where datname='template1'\" | sudo -u postgres psql | grep en_US.utf8"
+  end
+end
+
+package :update_postgresql_conf do
+  runner "sed -i 's/max_connections = 100/max_connections = 300/g' /etc/postgresql/#{opts[:postgres_version]}/main/postgresql.conf"
+
+  verify do
+    file_contains "/etc/postgresql/#{opts[:postgres_version]}/main/postgresql.conf", 'max_connections = 300'
   end
 end
 
