@@ -3,6 +3,7 @@ package :setup_system do
 
   requires :create_deployer_user, deployer_user: opts[:deployer_user]
   requires :system_settings, :security_upgrades
+  requires :utils
 end
 
 package :system_settings do
