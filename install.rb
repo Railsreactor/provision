@@ -19,7 +19,7 @@ if NODE_CONFIG['enabled']
 
         role :setup, NODE_CONFIG['ip']
         set :user, NODE_CONFIG['root_user']
-        set :password, NODE_CONFIG['root_password']
+        set :password, NODE_CONFIG['root_password'] if NODE_CONFIG['root_password']
       end
     end
   else

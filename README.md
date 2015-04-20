@@ -12,8 +12,8 @@ Set up local ruby gemset and gems from Gemfile `bundle install`
 ### Server
 
 1. Set up an IP address, roles and packages in `nodes.yml`. You can use an example for this `cp nodes.yml.example nodes.yml`. It contains all the options available.
-1. Run setup stage to set up deployer user, automatic security upgrades and enable 2 Gb swap `STAGE=setup ruby provision.rb`. You can skip swap creation just by adding `NO_SWAP=true`
-1. Provision your server `ruby provision.rb`
+2. Run setup stage to set up deployer user, automatic security upgrades and enable 2 Gb swap `STAGE=setup ruby provision.rb`. You can skip swap creation just by adding `NO_SWAP=true` . In case `root` user does not have password, in `nodes.yml` leave `root_password` blank.
+3. Provision your server `ruby provision.rb`
 
 ### Vagrant
 
