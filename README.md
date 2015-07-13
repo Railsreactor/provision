@@ -45,6 +45,7 @@ Please create new package, test it and send pull request
 
 * Vagrant: 1.7.3
 * VirtualBox: 5.0.0
+
 ## License
 
 MIT
