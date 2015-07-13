@@ -19,9 +19,9 @@ Set up local ruby gemset and gems from Gemfile `bundle install`
 
 Make sure `name: vagrant` node is `enabled: true` in `nodes.yml`
 
-Set up VirtualBox 4.2 https://www.virtualbox.org/wiki/Download_Old_Builds_4_2
+Set up VirtualBox 4.2 https://www.virtualbox.org/wiki/Downloads
 
-Set up Vagrant http://downloads.vagrantup.com/tags/v1.3.5
+Set up Vagrant https://www.vagrantup.com/downloads.html
 
 Check out settings in `Vagrantfile`
 
@@ -43,6 +43,8 @@ Please create new package, test it and send pull request
 * Ruby: 2.1.5, 2.2.1, 2.2.2
 * Postgres: 9.3, 9.4
 
+* Vagrant: 1.7.3
+* VirtualBox: 5.0.0
 ## License
 
 MIT
