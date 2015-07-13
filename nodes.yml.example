@@ -9,7 +9,8 @@ vagrant:
     nodejs: ~
     postgres_db:
       postgres_version: 9.4
-    redis: ~
+    redis: ~ 
+    logrotate: ~
   root_user: vagrant
   root_password: vagrant
   deployer_user: ubuntu
