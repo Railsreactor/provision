@@ -40,7 +40,7 @@ Please create new package, test it and send pull request
 ## Tested environments
 
 * Ubuntu: 12.04 LTS, 14.04 LTS
-* Ruby: 2.1.5, 2.2.1, 2.2.2
+* Ruby: 2.1.5, 2.2.1, 2.2.2, 2.2.3
 * Postgres: 9.3, 9.4
 
 ###
