@@ -19,7 +19,7 @@ Set up local ruby gemset and gems from Gemfile `bundle install`
 
 Make sure `name: vagrant` node is `enabled: true` in `nodes.yml`
 
-Set up VirtualBox 4.2 https://www.virtualbox.org/wiki/Downloads
+Set up VirtualBox https://www.virtualbox.org/wiki/Downloads
 
 Set up Vagrant https://www.vagrantup.com/downloads.html
 

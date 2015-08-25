@@ -42,3 +42,6 @@ DEPENDENCIES
   activesupport
   net-ssh (= 2.7.0)
   sprinkle
+
+BUNDLED WITH
+   1.10.3
