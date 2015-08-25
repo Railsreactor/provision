@@ -11,6 +11,7 @@ vagrant:
       postgres_version: 9.4
     redis: ~ 
     logrotate: ~
+    imageoptimizer: ~
   root_user: vagrant
   root_password: vagrant
   deployer_user: ubuntu
