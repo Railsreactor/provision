@@ -1,6 +1,8 @@
 Provision
 =========
 
+[![Join the chat at https://gitter.im/Railsreactor/provision](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Railsreactor/provision?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This project helps with provisioning for Ubuntu servers with minimal efforts using Sprinkle https://github.com/sprinkle-tool/sprinkle
 
 ## Set up
