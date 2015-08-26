@@ -3,8 +3,8 @@ module Sprinkle
     module Swap
       Sprinkle::Verify.register(Sprinkle::Verifiers::Swap)
 
-      def has_swap_memory
-        @commands << "[ \"$(grep -ie 'SwapTotal' /proc/meminfo | cut -d' ' -f2- | tr -d '[A-Z][a-z] ')\" -gt 0 ] && echo true"
+      def has_swap_memory(size)
+        @commands << "[ $(free -g | grep -oP '(Swap:)(\\s*)(\\d)' | grep -Po '\\d') -eq #{size} ]"
       end
     end
   end

@@ -1,18 +1,16 @@
 package :swap do
-  block_size_mb = 128
-  block_count = 16 # 2Gb swap
+  swap_size = opts[:swap_size] || 2
   swap_fstab = '/swapfile   none    swap    sw    0   0'
 
-  runner "sudo dd if=/dev/zero of=/swapfile bs=#{block_size_mb}M count=#{block_count}"
+  runner "fallocate -l #{swap_size}G /swapfile"
   runner 'sudo chmod 600 /swapfile'
   runner 'sudo mkswap /swapfile'
   runner 'sudo swapon /swapfile'
-  runner 'sudo swapon -s'
   runner "sh -c \"echo '#{swap_fstab}' >> /etc/fstab\""
 
   verify do
     file_contains '/etc/fstab', swap_fstab
     has_file '/swapfile'
-    has_swap_memory
+    has_swap_memory(swap_size)
   end
 end
