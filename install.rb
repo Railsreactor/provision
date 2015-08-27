@@ -10,7 +10,7 @@ if NODE_CONFIG['enabled']
   if ENV['STAGE'] == 'setup'
     policy :setup, roles: :setup do
       requires :setup_system, deployer_user: NODE_CONFIG['deployer_user']
-      requires :swap, deployer_user: NODE_CONFIG['deployer_user'], swap_size: NODE_CONFIG['swap'] unless ENV['NO_SWAP']
+      requires :swap, deployer_user: NODE_CONFIG['deployer_user'], swap_size: NODE_CONFIG['swap_size'] unless ENV['NO_SWAP']
     end
 
     deployment do
