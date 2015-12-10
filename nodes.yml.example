@@ -5,6 +5,7 @@ vagrant:
   packages:
     utils: ~
     nginx: ~
+    security: ~
     rbenv:
       ruby_version: 2.2.3
     nodejs: ~
