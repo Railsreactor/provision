@@ -5,7 +5,7 @@ package :security do
     post :install, [
       'sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local',
       "sed -i 's/bantime  = 600/bantime = 86400/g' /etc/fail2ban/jail.local",
-      '/etc/init.d/fail2ban restart'
+      'service fail2ban restart'
     ]
   end
 
