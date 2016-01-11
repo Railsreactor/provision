@@ -1,6 +1,6 @@
 package :postgres_db do
   description 'Install Postgres'
-  defaults postgres_version: '9.4'
+  defaults postgres_version: '9.5'
 
   requires :postgres_apt
   requires :postgresql_server, postgres_version: opts[:postgres_version]

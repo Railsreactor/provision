@@ -43,7 +43,7 @@ Please create new package, test it and send pull request
 
 * Ubuntu: 12.04 LTS, 14.04 LTS
 * Ruby: 2.3.0, 2.2.x, 2.1.5
-* Postgres: 9.3, 9.4
+* Postgres: 9.3, 9.4, 9.5
 
 ###
 
