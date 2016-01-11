@@ -1,10 +1,16 @@
 package :redis do
   description 'Install Redis'
-  requires :ppa
+  requires :redis_repo
+  requires :redis_server
   requires :update_redis_conf
+end
 
+package :redis_repo do
+  requires :ppa
   runner 'sudo add-apt-repository -y ppa:rwky/redis'
+end
 
+package :redis_server do
   apt 'redis-server' do
     pre :install, ['aptitude update']
   end
@@ -15,16 +21,11 @@ package :redis do
 end
 
 package :update_redis_conf do
-  config_file_path = "/etc/redis/redis.conf"
-  config_template = File.join(File.dirname(__FILE__), 'configs', 'redis.conf')
-
-  file config_file_path, contents: File.read(config_template), sudo: true
-
-  runner "chmod 755 #{config_file_path}"
+  runner "sudo sed -i 's/# bind 127.0.0.1/bind 127.0.0.1/g' /etc/redis/redis.conf"
   runner 'service redis-server restart'
 
   verify do
-    has_file config_file_path
-    has_permission config_file_path, '755'
+    # Find that config file does not have commented bind param
+    @commands << "cat /etc/redis/redis.conf |grep -v '# bind 127.0.0.1'|grep 'bind 127.0.0.1'"
   end
 end

@@ -10,9 +10,10 @@ vagrant:
       ruby_version: 2.3.0
     nodejs: ~
     postgres_db:
-      postgres_version: 9.4
+      postgres_version: 9.5
     redis: ~
     logrotate: ~
+    imagemagick: ~
     imageoptimizer: ~
   root_user: vagrant
   root_password: vagrant
