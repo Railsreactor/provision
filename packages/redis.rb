@@ -25,7 +25,6 @@ package :update_redis_conf do
   runner 'service redis-server restart'
 
   verify do
-    # Find that config file does not have commented bind param
     @commands << "cat /etc/redis/redis.conf |grep -v '# bind 127.0.0.1'|grep 'bind 127.0.0.1'"
   end
 end
