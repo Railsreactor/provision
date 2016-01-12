@@ -12,9 +12,7 @@ vagrant:
     postgres_db:
       postgres_version: 9.5
     redis: ~
-    logrotate: ~
     imagemagick: ~
-    imageoptimizer: ~
   root_user: vagrant
   root_password: vagrant
   deployer_user: ubuntu
