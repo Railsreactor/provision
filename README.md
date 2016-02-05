@@ -41,14 +41,14 @@ Please create new package, test it and send pull request
 
 ## Tested environments
 
-* Ubuntu: 12.04 LTS, 14.04 LTS
+* Ubuntu: 14.04 LTS, 12.04 LTS
 * Ruby: 2.3.0, 2.2.x, 2.1.5
-* Postgres: 9.3, 9.4, 9.5
+* Postgres: 9.5, 9.4, 9.3
 
 ###
 
-* Vagrant: 1.7.3
-* VirtualBox: 5.0.0
+* Vagrant: 1.8.x, 1.7.x
+* VirtualBox: 5.0.x
 
 ## License
 
