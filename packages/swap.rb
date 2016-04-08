@@ -1,8 +1,9 @@
 package :swap do
-  swap_size = (opts[:swap_size] || 2) * 1024 * 1024
+  swap_size = [opts[:swap_size].to_i, 2].max * 1_000_000_000
   swap_fstab = '/swapfile   none    swap    sw    0   0'
 
-  runner "fallocate -l #{swap_size} /swapfile"
+  # fallocate now accepts bytes
+  runner "sudo fallocate -l #{swap_size} /swapfile"
   runner 'sudo chmod 600 /swapfile'
   runner 'sudo mkswap /swapfile'
   runner 'sudo swapon /swapfile'
