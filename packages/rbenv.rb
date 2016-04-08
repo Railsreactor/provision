@@ -62,7 +62,7 @@ package :install_ruby do
   version opts[:ruby_version]
   requires :install_ruby_build, :ruby_dependencies
 
-  runner "true; CONFIGURE_OPTS=\"--disable-install-doc\" ~/.rbenv/bin/rbenv install -f -v #{version}", sudo: false
+  runner "true; CFLAGS=\"-march=native -O3 -fPIC\" CONFIGURE_OPTS=\"--disable-install-doc\" ~/.rbenv/bin/rbenv install -f -v #{version}", sudo: false
   runner 'true; touch ~/.rbenv/global'
   runner "echo '#{version}' > ~/.rbenv/global"
   runner 'true; echo "gem: --no-ri --no-rdoc\n" > ~/.gemrc'
