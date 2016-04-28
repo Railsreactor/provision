@@ -1,6 +1,6 @@
 package :rbenv do
   description 'Install rbenv Ruby version manager'
-  defaults ruby_version: '2.3.0'
+  defaults ruby_version: '2.3.1'
 
   requires :install_rbenv, :install_ruby_build
   requires :install_ruby, ruby_version: opts[:ruby_version]
