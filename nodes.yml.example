@@ -7,7 +7,7 @@ vagrant:
     nginx: ~
     security: ~
     rbenv:
-      ruby_version: 2.3.0
+      ruby_version: 2.3.1
     nodejs: ~
     postgres_db:
       postgres_version: 9.5
