@@ -1,6 +1,6 @@
 package :imagemagick do
   apt 'imagemagick' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
   apt 'optipng'
   apt 'jpegoptim'

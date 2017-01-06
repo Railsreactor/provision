@@ -2,7 +2,7 @@ package :logrotate do
   description 'Install logrotate'
 
   apt 'logrotate' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
 
   verify do

@@ -12,7 +12,7 @@ end
 
 package :redis_server do
   apt 'redis-server' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
 
   verify do

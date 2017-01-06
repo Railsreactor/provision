@@ -1,7 +1,7 @@
 package :utils do
   description 'Setup tools and goodies'
   apt 'vim curl htop' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
 
   verify do

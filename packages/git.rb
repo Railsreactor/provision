@@ -2,7 +2,7 @@ package :git do
   description 'Install git'
 
   apt 'git-core' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
 
   verify do

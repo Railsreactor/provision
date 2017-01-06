@@ -19,7 +19,7 @@ end
 
 package :unattended_upgrades do
   apt 'unattended-upgrades' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
 
   verify do

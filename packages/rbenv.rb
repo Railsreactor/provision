@@ -39,7 +39,7 @@ end
 package :ruby_dependencies do
   description 'Setup Ruby dependencies'
   apt 'libffi-dev libssl-dev zlib1g-dev libreadline-dev libpq-dev libyaml-dev build-essential flex gettext libxslt1-dev libxml2-dev' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
 
   verify do

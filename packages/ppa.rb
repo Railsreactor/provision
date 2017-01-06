@@ -1,6 +1,6 @@
 package :ppa do
   apt 'python-software-properties', 'software-properties-common' do
-    pre :install, ['aptitude update']
+    pre :install, ['apt-get update']
   end
 
   verify do
