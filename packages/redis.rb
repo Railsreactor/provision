@@ -22,7 +22,7 @@ end
 
 package :update_redis_conf do
   runner "sudo sed -i 's/# bind 127.0.0.1/bind 127.0.0.1/g' /etc/redis/redis.conf"
-  runner 'service redis-server restart'
+  runner 'sudo service redis-server restart'
 
   verify do
     @commands << "cat /etc/redis/redis.conf |grep -v '# bind 127.0.0.1'|grep 'bind 127.0.0.1'"
