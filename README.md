@@ -14,7 +14,7 @@ Set up local ruby gemset and gems from Gemfile `bundle install`
 ### Server
 
 1. Set up an IP address, roles and packages in `nodes.yml`. You can use an example for this `cp nodes.yml.example nodes.yml`. It contains all the options available.
-2. Run setup stage to set up deployer user, automatic security upgrades and enable 2 Gb swap `STAGE=setup ruby provision.rb`. You can skip swap creation just by adding `NO_SWAP=true` . In case `root` user does not have password, in `nodes.yml` leave `root_password` blank.
+2. Run setup stage to set up deployer user (usually `ubuntu`), automatic security upgrades and enable 2 Gb swap `STAGE=setup ruby provision.rb`. You can skip swap creation just by adding `NO_SWAP=true` . In case `root` user does not have password, in `nodes.yml` leave `root_password` blank.
 3. Provision your server `ruby provision.rb`
 
 ### Vagrant
@@ -41,9 +41,14 @@ Please create new package, test it and send pull request
 
 ## Tested environments
 
-* Ubuntu: 14.04 LTS, 12.04 LTS
-* Ruby: 2.3.0, 2.2.x, 2.1.5
-* Postgres: 9.5, 9.4, 9.3
+* Ubuntu: 16.04 LTS, 14.04 LTS, 12.04 LTS
+* Ruby: 2.3.1, 2.3.0, 2.2.x, 2.1.5
+* Postgres: 9.6, 9.5, 9.4, 9.3
+
+## Tested cloud providers
+
+* DigitalOcean: works smoothly
+* Google Compute Engine: use Ubuntu 16.04 LTS. ssh with your user, `sudo su` and then add your key to `/home/ubuntu/.ssh/authorized_keys` manually before doing `ruby provision.rb`
 
 ###
 
