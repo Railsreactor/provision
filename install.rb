@@ -22,6 +22,7 @@ if NODE_CONFIG['enabled']
         role :setup, NODE_CONFIG['ip']
         set :user, NODE_CONFIG['root_user']
         set :password, NODE_CONFIG['root_password'] if NODE_CONFIG['root_password']
+        set :ssh_options, forward_agent: true
       end
     end
   else
@@ -39,6 +40,7 @@ if NODE_CONFIG['enabled']
         role :provision, NODE_CONFIG['ip']
         set :user, NODE_CONFIG['deployer_user']
         set :pty, true
+        set :ssh_options, forward_agent: true
       end
 
       # source based package installer defaults
