@@ -1,11 +1,11 @@
 package :nodejs do
-  requires :ppa
-
   apt 'python g++ make' do
     pre :install, ['apt-get update']
   end
 
-  runner 'add-apt-repository ppa:chris-lea/node.js -y'
+  runner "curl -sL https://deb.nodesource.com/setup_6.x -o /home/#{opts[:deployer_user]}/nodesource_setup.sh"
+  runner "sudo chmod a+x /home/#{opts[:deployer_user]}/nodesource_setup.sh"
+  runner "sudo bash /home/#{opts[:deployer_user]}/nodesource_setup.sh"
 
   apt 'nodejs' do
     pre :install, ['apt-get update']
