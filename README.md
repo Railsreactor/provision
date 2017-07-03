@@ -42,13 +42,14 @@ Please create new package, test it and send pull request
 ## Tested environments
 
 * Ubuntu: 16.04 LTS, 14.04 LTS, 12.04 LTS
-* Ruby: 2.3.1, 2.3.0, 2.2.x, 2.1.5
+* Ruby: 2.4.1, 2.3.1, 2.3.0, 2.2.x, 2.1.5
 * Postgres: 9.6, 9.5, 9.4, 9.3
 
 ## Tested cloud providers
 
 * DigitalOcean: works smoothly
 * Google Compute Engine: use Ubuntu 16.04 LTS. ssh with your user, `sudo su` and then add your key to `/home/ubuntu/.ssh/authorized_keys` manually before doing `ruby provision.rb`
+* Azure: update TCP timeout setting
 
 ###
 
