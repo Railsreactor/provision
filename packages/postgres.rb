@@ -1,6 +1,6 @@
 package :postgres_db do
   description 'Install Postgres'
-  defaults postgres_version: '9.5'
+  defaults postgres_version: '9.6'
 
   requires :postgres_apt
   requires :postgresql_server, postgres_version: opts[:postgres_version]
@@ -20,18 +20,6 @@ package :postgres_apt do
 
   verify do
     file_contains apt_list, 'pgdg'
-  end
-end
-
-# This can be useful if you do not need server itself but want to connect to remote server
-package :postgresql_client do
-  requires :postgres_apt
-
-  # apt 'pqdev'
-  apt "postgresql-client-#{opts[:postgres_version]}"
-
-  verify do
-    has_apt "postgresql-client-#{opts[:postgres_version]}"
   end
 end
 
