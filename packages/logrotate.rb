@@ -16,7 +16,7 @@
 #  compress
 #  delaycompress
 #  copytruncate
-#  nodateext
+#  dateext
 #}
 #
 # logrotate /etc/logrotate.d/xxx.conf && ls -la /home/ubuntu/xxx/shared/log
