@@ -7,7 +7,7 @@ package :swap do
   runner 'sudo chmod 600 /swapfile'
   runner 'sudo mkswap /swapfile'
   runner 'sudo swapon /swapfile'
-  runner "sh -c \"echo '#{swap_fstab}' >> /etc/fstab\""
+  runner "sudo sh -c \"echo '#{swap_fstab}' >> /etc/fstab\""
 
   verify do
     file_contains '/etc/fstab', swap_fstab
